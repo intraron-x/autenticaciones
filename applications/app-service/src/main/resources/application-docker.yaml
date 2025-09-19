@@ -1,0 +1,14 @@
+server:
+  port: 8080
+  
+  # Configuración de la base de datos para Docker
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://db:5432/sjbd
+    username: postgres
+    password: admin
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://db:5432/sjbd
+    user: postgres
+    password: admin
