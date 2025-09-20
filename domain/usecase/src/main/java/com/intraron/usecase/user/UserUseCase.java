@@ -31,7 +31,7 @@ public class UserUseCase {
                 user.getApellidos() == null || user.getApellidos().trim().isEmpty() ||
                 user.getCorreoElectronico() == null || user.getCorreoElectronico().trim().isEmpty() ||
                 user.getPassword() == null || user.getPassword().isEmpty() ||
-                user.getSalarioBase() == 0.0) {
+                user.getSalarioBase() == 0.0 || user.getRoles() == null || user.getRoles().isEmpty()) {
             log.warn("Validación fallida: campos requeridos faltantes.");
             return Mono.error(new IllegalArgumentException("Todos los campos son obligatorios."));
         }

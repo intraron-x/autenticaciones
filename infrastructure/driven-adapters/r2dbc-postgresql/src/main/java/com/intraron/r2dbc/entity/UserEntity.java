@@ -29,32 +29,31 @@ import java.util.stream.Collectors;
 @Table("userdata")
 public class UserEntity implements UserDetails {
 
+    @Column("nombres") // Mapea 'nombres' a 'NOMBRES'
+    private String nombres;
+    @Column("apellidos") // Mapea 'apellidos' a 'APELLIDOS'
+    private String apellidos;
+    @Column("fecha_nacimiento")
+    private LocalDate fechaNacimiento; // Se usa LocalDate para la fecha
+    @Column("direccion") // Mapea 'direccion' a 'DIRECCION'
+    private String direccion;
+    @Column("telefono") // Mapea 'telefono' a 'TELEFONO'
+    private String telefono;
+    @Column("correo_electronico") // Mapea 'correoElectronico' a 'CORREO_ELECTRONICO'
+    private String correoElectronico;
+    @Column("salario_base") // Mapea 'salarioBase' a 'SALARIO_BASE'
+    private Double salarioBase;
+    @Column("password")
+    private String password; // intraron: Nuevo campo para la contraseña
+    @Column("roles")
+    private List<String> roles;
     @Id
     private String id;
-    @Column("NOMBRES") // Mapea 'nombres' a 'NOMBRES'
-    private String nombres;
-    @Column("APELLIDOS") // Mapea 'apellidos' a 'APELLIDOS'
-    private String apellidos;
-    @Column("FECHA_NACIMIENTO")
-    private LocalDate fechaNacimiento; // Se usa LocalDate para la fecha
-    @Column("DIRECCION") // Mapea 'direccion' a 'DIRECCION'
-    private String direccion;
-    @Column("TELEFONO") // Mapea 'telefono' a 'TELEFONO'
-    private String telefono;
-    @Column("CORREO_ELECTRONICO") // Mapea 'correoElectronico' a 'CORREO_ELECTRONICO'
-    private String correoElectronico;
-    @Column("SALARIO_BASE") // Mapea 'salarioBase' a 'SALARIO_BASE'
-    private Double salarioBase;
-    @Column("PASSWORD")
-    private String password; // intraron: Nuevo campo para la contraseña
-    @Column("ROLES")
-    private List<String> roles;
 
     // intraron: Mapeo de la entidad de persistencia al modelo de dominio.
     // Ahora convertimos List<String> a Set<String>.
     public User toUser() {
         return User.builder()
-                .id(this.id)
                 .nombres(this.nombres)
                 .apellidos(this.apellidos)
                 .telefono(this.telefono)
@@ -65,6 +64,7 @@ public class UserEntity implements UserDetails {
                 .roles(this.roles != null ?
                         Set.copyOf(this.roles) :
                         Set.of())
+                .id(this.id)
                 .build();
     }
 

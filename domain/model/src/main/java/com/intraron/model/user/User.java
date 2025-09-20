@@ -18,7 +18,6 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class User {
 
-    private String id;
     private String nombres;
     private String apellidos;
     private LocalDate fechaNacimiento;
@@ -28,5 +27,6 @@ public class User {
     private Double salarioBase;
     private String password;
     private Set<String> roles;
+    private String id;
 }
 
