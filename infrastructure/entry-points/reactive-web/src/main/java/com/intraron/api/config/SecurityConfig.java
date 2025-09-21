@@ -56,7 +56,8 @@ public class SecurityConfig {
                 .securityContextRepository(NoOpServerSecurityContextRepository.getInstance()) // intraron: Deshabilitar el almacenamiento del contexto de seguridad, es stateless con JWT
 				.headers(ServerHttpSecurity.HeaderSpec::disable) // <- Esta es la línea que soluciona el problem
                 .authorizeExchange(exchanges -> exchanges
-                        .pathMatchers("/api/v1/auth/login", "/api/v1/auth/register", "/webjars/**", "/v3/api-docs/**", "/swagger-ui/**").permitAll() // intraron: Permitir acceso a los endpoints de autenticación y documentación
+                        .pathMatchers("/api/v1/auth/login", "/api/v1/auth/register").permitAll() // intraron: Permitir acceso a los endpoints de autenticación y documentación
+                        .pathMatchers("/api-docs/**",",/webjars/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         // intraron: Se agrega una nueva regla para el endpoint de comunicación entre servicios.
                         // Solo permite el acceso si la solicitud ha sido autenticada como 'SERVICE_TO_SERVICE_COMMUNICATION'.
                         .pathMatchers(HttpMethod.GET, "/api/v1/users/by-email").hasRole("SERVICE_TO_SERVICE_COMMUNICATION")
